@@ -20,9 +20,18 @@ class CreditCard{
     }
 }
 
-$card = new CreditCard('Gianni', 5464823135498564, '15/02/26', 558);
+class User{
+    public $creditCards;
 
-var_dump($card);
+    public function __construct($creditCards){
+        $this->creditCards = $creditCards;
+    }
+}
+
+$card1 = new CreditCard('Gianni', 5464823135498564, '15/02/26', 558);
+$user = new User($card1, $card2);
+
+var_dump($user);
 
 
 
