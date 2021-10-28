@@ -29,7 +29,7 @@ class User{
 }
 
 $card1 = new CreditCard('Gianni', 5464823135498564, '15/02/26', 558);
-$user = new User($card1, $card2);
+$user = new User($card1);
 
 var_dump($user);
 
