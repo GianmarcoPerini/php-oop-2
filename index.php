@@ -1,39 +1,64 @@
 <?php 
+    class Product{
+        public $name;
+        public $brand;
+        public $price;
+        public $category;
 
-class CreditCard{
-    public $name;
-    public $unicCode;
-    public $expirationDate;
-    public $cvv;
+        public function __construct($name, $brand, $price, $category){
+            $this->name = $name;
+            $this->brand = $brand;
+            $this->price = $price;
+            $this->category = $category;
+        }
 
-    /**
-     * @param string $nome proprietario
-     * @param integer $codice univoco della carta di credito
-     * @param string $data scadenza carta
-     * @param integer $codice di conferma
-     */
-    public function __construct($name, $unicCode, $expirationDate, $cvv){
-        $this->name = $name;
-        $this->unicCode = $unicCode;
-        $this->expirationDate = $expirationDate;
-        $this->cvv = $cvv;
+        public function getName(){
+            return $this->name;
+        }
+
+        public function getBrand(){
+            return $this->brand;
+        }
+
+        public function getPrice(){
+            return $this->price;
+        }
+        
+        public function getCategory(){
+            return $this->category;
+        }
     }
-}
 
-class User{
-    public $creditCards;
+    class User {
+        public $id;
+        public $name;
+        public $surname;
+        public $adress;
+        public $premium;
 
-    public function __construct($creditCards){
-        $this->creditCards = $creditCards;
+        public function __construct($id, $name, $surname, $adress, $premium = false){
+            $this->id = $id;
+            $this->name = $name;
+            $this->surname = $surname;
+            $this->adress = $adress;
+            $this->premium = $premium;
+        }
     }
-}
 
-$card1 = new CreditCard('Gianni', 5464823135498564, '15/02/26', 558);
-$user = new User($card1);
+    class Card extends User {
+        public $cardID;
 
-var_dump($user);
+        public function __construct($cardID, $id, $name, $surname, $adress, $premium){
 
+            parent::__construct($id, $name, $surname, $adress, $premium);
 
+            $this->cardID = $cardID;
+        }
 
+    }
+
+    $leo = new User(551, 'Leonardo', 'Pascal', 'via Zianigo', true );
+
+    var_dump($leo)
 
 ?>
