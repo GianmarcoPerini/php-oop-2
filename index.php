@@ -1,9 +1,9 @@
 <?php 
     class Product{
-        public $name;
-        public $brand;
-        public $price;
-        public $category;
+        protected $name;
+        protected $brand;
+        protected $price;
+        protected $category;
 
         public function __construct($name, $brand, $price, $category){
             $this->name = $name;
@@ -30,11 +30,11 @@
     }
 
     class User {
-        public $id;
-        public $name;
-        public $surname;
-        public $adress;
-        public $premium;
+        protected $id;
+        protected $name;
+        protected $surname;
+        protected $adress;
+        protected $premium;
 
         public function __construct($id, $name, $surname, $adress, $premium = false){
             $this->id = $id;
@@ -43,22 +43,54 @@
             $this->adress = $adress;
             $this->premium = $premium;
         }
+
+        public function setPremium($bool){
+            return $this->premium = $bool;
+        }
     }
 
-    class Card extends User {
-        public $cardID;
+    class Card {
+        protected $cardID;
+        protected $cardCode;
+        protected $expDate;
+        protected $ccv;
 
-        public function __construct($cardID, $id, $name, $surname, $adress, $premium){
-
-            parent::__construct($id, $name, $surname, $adress, $premium);
+        public function __construct($cardID, $cardCode, $expDate, $ccv){
 
             $this->cardID = $cardID;
+            $this->cardCode = $cardCode;
+            $this->expDate = $expDate;
+            $this->ccv = $ccv;
         }
-
     }
 
-    $leo = new User(551, 'Leonardo', 'Pascal', 'via Zianigo', true );
+    class Cart{
+        public $products = [];
 
-    var_dump($leo)
+        public function setProducts($product){
+            return $this->products[] = $product;
+        }
+
+        public function checkPremium($product, $user){
+
+            $productPrice = $product->getPrice();
+
+            if( $productPrice > 100 ){
+                return $user->setPremium(true);
+            }
+        }
+    }
+
+    $leo = new User(551, 'Leonardo', 'Pascal', 'via Zianigo');
+    $telefono = new Product('xl-34-gc', 'Nokia', 150, 'Elettronic');
+    $leoCard = new Card(785, 654862154895,'12/5/2026', 556);
+    $cart = new Cart();
+    $cart->setProducts($telefono);
+    $cart->checkPremium($telefono, $leo);
+    
+
+    var_dump($leoCard);
+    var_dump($telefono);
+    var_dump($leo);
 
 ?>
